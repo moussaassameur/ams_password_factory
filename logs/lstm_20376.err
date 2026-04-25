@@ -1,0 +1,12 @@
+Traceback (most recent call last):
+  File "train_lstm.py", line 40, in <module>
+    eval_dataset = PasswordDataset(eval_pw, char2idx)
+  File "/home/nas-wks01/users/uapv2600488/ams_password_factory/src/data_utils.py", line 38, in __init__
+    self.sequences = [torch.tensor(encode_password(p, char2idx), dtype=torch.long) for p in passwords]
+  File "/home/nas-wks01/users/uapv2600488/ams_password_factory/src/data_utils.py", line 38, in <listcomp>
+    self.sequences = [torch.tensor(encode_password(p, char2idx), dtype=torch.long) for p in passwords]
+  File "/home/nas-wks01/users/uapv2600488/ams_password_factory/src/data_utils.py", line 24, in encode_password
+    return [char2idx["<SOS>"]] + [char2idx[c] for c in password] + [char2idx["<EOS>"]]
+  File "/home/nas-wks01/users/uapv2600488/ams_password_factory/src/data_utils.py", line 24, in <listcomp>
+    return [char2idx["<SOS>"]] + [char2idx[c] for c in password] + [char2idx["<EOS>"]]
+KeyError: ','

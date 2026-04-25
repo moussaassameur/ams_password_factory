@@ -1,0 +1,28 @@
+torch= 1.10.1+cu102 cuda= True
+Tesla P100-PCIE-16GB
+Chargement des données...
+Train size: 375853
+Eval size : 1999
+Vocab size: 96
+MAX_LEN   : 115
+Device    : cuda
+Début de l'entraînement Transformer Decoder-only...
+Epoch 1/15 | train_loss=2.8418 | eval_loss=4.3928 | time=28.4s
+Nouveau meilleur modèle sauvegardé : transformer_decoder_best.pt
+Epoch 2/15 | train_loss=2.7688 | eval_loss=4.4563 | time=28.5s
+Epoch 3/15 | train_loss=2.7473 | eval_loss=4.4587 | time=28.5s
+Epoch 4/15 | train_loss=2.7335 | eval_loss=4.4338 | time=27.1s
+Epoch 5/15 | train_loss=2.7244 | eval_loss=4.4519 | time=24.2s
+Epoch 6/15 | train_loss=2.7169 | eval_loss=4.4999 | time=21.8s
+Epoch 7/15 | train_loss=2.7105 | eval_loss=4.4773 | time=21.8s
+Epoch 8/15 | train_loss=2.7055 | eval_loss=4.4644 | time=21.8s
+Epoch 9/15 | train_loss=2.7015 | eval_loss=4.5048 | time=21.8s
+Epoch 10/15 | train_loss=2.6979 | eval_loss=4.4559 | time=21.8s
+Epoch 11/15 | train_loss=2.6953 | eval_loss=4.4391 | time=21.8s
+Epoch 12/15 | train_loss=2.6920 | eval_loss=4.4646 | time=21.8s
+Epoch 13/15 | train_loss=2.6893 | eval_loss=4.4804 | time=21.8s
+Epoch 14/15 | train_loss=2.6868 | eval_loss=4.4639 | time=21.8s
+Epoch 15/15 | train_loss=2.6844 | eval_loss=4.4407 | time=21.8s
+Dernier modèle sauvegardé : transformer_decoder_last.pt
+Log sauvegardé : ../logs/transformer_decoder_training_log.txt
+Entraînement Transformer terminé

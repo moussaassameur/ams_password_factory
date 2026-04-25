@@ -1,0 +1,8 @@
+torch= 1.10.1+cu102 cuda= True
+Tesla P100-PCIE-16GB
+Chargement des données...
+Train size: 375853
+Eval size : 1999
+Vocab size: 96
+Device: cuda
+Début de l'entraînement Transformer Decoder-only...

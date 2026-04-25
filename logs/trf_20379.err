@@ -1,0 +1,14 @@
+Traceback (most recent call last):
+  File "train_transformer_decoder.py", line 166, in <module>
+    train_loss = run_epoch(model, train_loader, criterion, optimizer=optimizer)
+  File "train_transformer_decoder.py", line 142, in run_epoch
+    outputs = model(x_batch)
+  File "/home/nas-wks01/users/uapv2600488/.local/lib/python3.6/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "train_transformer_decoder.py", line 108, in forward
+    x = self.pos_encoder(x)
+  File "/home/nas-wks01/users/uapv2600488/.local/lib/python3.6/site-packages/torch/nn/modules/module.py", line 1102, in _call_impl
+    return forward_call(*input, **kwargs)
+  File "train_transformer_decoder.py", line 77, in forward
+    x = x + self.pe[:, :x.size(1), :]
+RuntimeError: The size of tensor a (111) must match the size of tensor b (69) at non-singleton dimension 1

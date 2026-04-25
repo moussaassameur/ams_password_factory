@@ -1,0 +1,105 @@
+import os
+import torch
+import torch.nn as nn
+from torch.utils.data import DataLoader
+from data_utils import load_passwords, build_vocab, PasswordDataset, collate_fn
+
+# =========================
+# Config
+# =========================
+TRAIN_PATH = "../data/train.txt"
+MODEL_DIR = "../outputs/models"
+os.makedirs(MODEL_DIR, exist_ok=True)
+
+BATCH_SIZE = 128
+EMBED_DIM = 64
+HIDDEN_DIM = 128
+NUM_LAYERS = 1
+EPOCHS = 3
+LR = 0.001
+MAX_SAMPLES = 50000   # pour commencer rapidement
+
+DEVICE = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+# =========================
+# Load data
+# =========================
+train_pw = load_passwords(TRAIN_PATH)
+train_pw = train_pw[:MAX_SAMPLES]
+
+vocab, char2idx, idx2char = build_vocab(train_pw)
+pad_idx = char2idx["<PAD>"]
+
+dataset = PasswordDataset(train_pw, char2idx)
+loader = DataLoader(
+    dataset,
+    batch_size=BATCH_SIZE,
+    shuffle=True,
+    collate_fn=lambda batch: collate_fn(batch, pad_idx)
+)
+
+# =========================
+# Model
+# =========================
+class LSTMPasswordModel(nn.Module):
+    def __init__(self, vocab_size, embed_dim, hidden_dim, num_layers):
+        super().__init__()
+        self.embedding = nn.Embedding(vocab_size, embed_dim, padding_idx=pad_idx)
+        self.lstm = nn.LSTM(embed_dim, hidden_dim, num_layers=num_layers, batch_first=True)
+        self.fc = nn.Linear(hidden_dim, vocab_size)
+
+    def forward(self, x):
+        x = self.embedding(x)
+        out, _ = self.lstm(x)
+        out = self.fc(out)
+        return out
+
+model = LSTMPasswordModel(len(vocab), EMBED_DIM, HIDDEN_DIM, NUM_LAYERS).to(DEVICE)
+
+criterion = nn.CrossEntropyLoss(ignore_index=pad_idx)
+optimizer = torch.optim.Adam(model.parameters(), lr=LR)
+
+# =========================
+# Training
+# =========================
+for epoch in range(EPOCHS):
+    model.train()
+    total_loss = 0.0
+
+    for x_batch, y_batch in loader:
+        x_batch = x_batch.to(DEVICE)
+        y_batch = y_batch.to(DEVICE)
+
+        optimizer.zero_grad()
+        outputs = model(x_batch)  # [B, T, V]
+
+        loss = criterion(
+            outputs.reshape(-1, outputs.size(-1)),
+            y_batch.reshape(-1)
+        )
+
+        loss.backward()
+        optimizer.step()
+
+        total_loss += loss.item()
+
+    avg_loss = total_loss / len(loader)
+    print(f"Epoch {epoch+1}/{EPOCHS} - Loss: {avg_loss:.4f}")
+
+# =========================
+# Save checkpoint
+# =========================
+checkpoint = {
+    "model_state_dict": model.state_dict(),
+    "vocab": vocab,
+    "char2idx": char2idx,
+    "idx2char": idx2char,
+    "config": {
+        "embed_dim": EMBED_DIM,
+        "hidden_dim": HIDDEN_DIM,
+        "num_layers": NUM_LAYERS
+    }
+}
+
+torch.save(checkpoint, os.path.join(MODEL_DIR, "lstm_model.pt"))
+print(✅ Modèle sauvegardé dans ../outputs/models/lstm_model.pt")

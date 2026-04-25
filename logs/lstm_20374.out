@@ -1,0 +1,2 @@
+torch= 1.10.1+cu102 cuda= True
+Tesla P100-PCIE-16GB

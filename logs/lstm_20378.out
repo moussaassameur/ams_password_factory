@@ -1,0 +1,32 @@
+torch= 1.10.1+cu102 cuda= True
+Tesla P100-PCIE-16GB
+Chargement des données...
+Train size: 375853
+Eval size : 1999
+Vocab size: 96
+Device: cuda
+Début de l'entraînement...
+Epoch 1/20 | train_loss=2.7635 | eval_loss=4.3214 | time=15.6s
+Nouveau meilleur modèle sauvegardé : lstm_best.pt
+Epoch 2/20 | train_loss=2.6180 | eval_loss=4.3619 | time=17.1s
+Epoch 3/20 | train_loss=2.5764 | eval_loss=4.3624 | time=17.2s
+Epoch 4/20 | train_loss=2.5527 | eval_loss=4.3369 | time=17.3s
+Epoch 5/20 | train_loss=2.5375 | eval_loss=4.3426 | time=17.1s
+Epoch 6/20 | train_loss=2.5264 | eval_loss=4.3621 | time=12.8s
+Epoch 7/20 | train_loss=2.5177 | eval_loss=4.4004 | time=16.4s
+Epoch 8/20 | train_loss=2.5108 | eval_loss=4.4110 | time=14.1s
+Epoch 9/20 | train_loss=2.5049 | eval_loss=4.4064 | time=15.7s
+Epoch 10/20 | train_loss=2.5005 | eval_loss=4.4022 | time=17.1s
+Epoch 11/20 | train_loss=2.4963 | eval_loss=4.4269 | time=16.7s
+Epoch 12/20 | train_loss=2.4926 | eval_loss=4.4764 | time=16.9s
+Epoch 13/20 | train_loss=2.4893 | eval_loss=4.4263 | time=14.6s
+Epoch 14/20 | train_loss=2.4869 | eval_loss=4.4325 | time=15.8s
+Epoch 15/20 | train_loss=2.4841 | eval_loss=4.4760 | time=15.4s
+Epoch 16/20 | train_loss=2.4822 | eval_loss=4.5454 | time=15.6s
+Epoch 17/20 | train_loss=2.4799 | eval_loss=4.4574 | time=17.1s
+Epoch 18/20 | train_loss=2.4784 | eval_loss=4.5075 | time=17.3s
+Epoch 19/20 | train_loss=2.4767 | eval_loss=4.4541 | time=17.0s
+Epoch 20/20 | train_loss=2.4750 | eval_loss=4.5121 | time=13.7s
+Dernier modèle sauvegardé : lstm_last.pt
+Log sauvegardé : ../logs/lstm_training_log.txt
+Entraînement terminé
