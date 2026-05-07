@@ -15,9 +15,9 @@ import torch.nn.functional as F
 MODEL_PATH = "../outputs/models/transformer_decoder_best.pt"
 OUTPUT_DIR = "../outputs/generated"
 MAX_GEN_LEN = 32
-TEMPERATURE = 0.85
-TOP_K       = 50
-TOP_P       = 0.95
+TEMPERATURE = 0.9
+TOP_K       = 0        # 0 = désactivé (nucleus pur, meilleure couverture)
+TOP_P       = 0.92
 BATCH_SIZE  = 512      # GPU : augmenter si VRAM disponible
 MIN_LEN     = 4        # ignorer les mots de passe trop courts
 
@@ -196,9 +196,9 @@ def main():
           f"batch={BATCH_SIZE}\n")
 
     targets = [
-        ("10k.txt",  10_000,    True),
-        ("100k.txt", 100_000,   True),
-        ("1M.txt",   1_000_000, True),
+        ("transformer_10k.txt",  10_000,    True),
+        ("transformer_100k.txt", 100_000,   True),
+        ("transformer_1M.txt",   1_000_000, True),
     ]
 
     for filename, n, dedup in targets:
